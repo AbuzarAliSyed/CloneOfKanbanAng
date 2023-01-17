@@ -1,0 +1,49 @@
+<body  class="container"  style="width: max-content">
+
+    <br />
+    <table  class="table table-responsive">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Status</th>
+                <th scope="col">Age</th>
+                <th scope="col">Lwd</th>
+                <th scope="col">Location</th>
+                <th scope="col">Maritial Status</th>
+                <th scope="col">Rel Experience</th>
+                <th scope="col">Skills</th>
+                <th scope="col">Technology</th>
+                <th scope="col">Total Experience</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let item of searchData">
+            <tr>
+                <td scope="col">{{ item.candidateId }}</td>
+                <td scope="col">{{ item.candidateName }}</td>
+                <td scope="col">{{item.status}}</td>
+                <td scope="col">{{ item.age }}</td>
+                <td scope="col">{{ item.expectedLwd }}</td>
+                <td scope="col">{{ item.location }}</td>
+                <td scope="col">{{ item.maritialStatus }}</td>
+                <td scope="col">{{ item.relevantExperiance }}</td>
+                <td scope="col">{{ item.skills }}</td>
+                <td scope="col">{{ item.technology }}</td>
+                <td scope="col">{{ item.totalExperiance }}</td>
+            </tr>
+        </tbody>
+        <br />
+    </table>
+    <button class="button" mat-raised-button (click)="exportCsv()">
+        Export CSV
+    </button>
+    <div>
+        <button class="button" mat-raised-button id="modal-close-button" (click)="closeModal()">
+            Close
+        </button>
+    </div>
+    <div *ngIf="exportSuccess != undefined">
+        <p>{{ exportSuccess }}</p>
+    </div>
+
+</body>

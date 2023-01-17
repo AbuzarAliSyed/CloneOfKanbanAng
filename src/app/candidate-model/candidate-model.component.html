@@ -1,0 +1,114 @@
+<!-- <div style="min-width:100%;min-height: 200%;">
+    <br> -->
+<mat-icon style="margin-left: 95%;" (click)="closeModal()">close</mat-icon>
+<div styel="margin-left:95%" class="scrollbar" id="style-1" 
+  style="background-color: #45beaa;color:#45beaa; max-height: 600px; margin-top: 10px;overflow-y:auto;border-radius:10px;">
+
+  <div class="container  h-100" >
+    <div class="row d-flex justify-content-center align-items-center p-4">
+
+      <form class="col-lg-8" #Registrationform="ngForm" (ngSubmit)="registerCandidate()">
+
+        <small *ngIf="msg!=null && msg.status==500" class="text-danger">{{msg.message}}</small>
+        <h5 class="display-4">Candidate Registration</h5>
+        <div class="form-group">
+          <label for="candidateId">Candidate ID:</label>
+          <input type="candidateId" class="form-control" placeholder="Enter Candidate Id" name="candidateId"
+            [(ngModel)]="candidate.candidateId" required pattern="([U])([I])([D])\d\d\d\d\d" #candidateId="ngModel"
+            [class.is-invalid]="candidateId.invalid && candidateId.touched">
+          <div *ngIf="candidateId.errors && (candidateId.invalid && candidateId.touched) ">
+            <small class="text-danger" *ngIf="candidateId.errors?.['required']">CandidateId is a required field</small>
+            <small class="text-danger" *ngIf="candidateId.errors?.['pattern']">Enter the correct format of Candidate
+              id</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="candidateName">Candidate Name:</label>
+          <input type="text" class="form-control" placeholder="Enter candidate name" name="candidateName"
+            [(ngModel)]="candidate.candidateName" #candidateName="ngModel" required
+            [class.is-invalid]="candidateName.invalid && candidateName.touched">
+          <small class="text-danger" [class.d-none]="candidateName.valid || candidateName.untouched">Candidate name is a
+            required field</small>
+        </div>
+
+        <div class="form-group">
+          <label for="candidateAge">Candidate Age:</label>
+          <input type="text" class="form-control" placeholder="Enter candidate age" name="candidateAge"
+            [(ngModel)]="candidate.age" #candidateAge="ngModel" required
+            [class.is-invalid]="candidateAge.invalid && candidateAge.touched">
+          <small class="text-danger" [class.d-none]="candidateAge.valid || candidateAge.untouched">Candidate age is a
+            required field</small>
+        </div>
+        <div class="form-group">
+          <label for="lwd">Expected LWD:</label>
+          <input type="date" class="form-control" placeholder="Enter expected lwd" name="lwd"
+            [(ngModel)]="candidate.expectedLwd" #lwd="ngModel" required [class.is-invalid]="lwd.invalid && lwd.touched">
+          <small class="text-danger" [class.d-none]="lwd.valid || lwd.untouched">Expected lwd is a required
+            field</small>
+        </div>
+        <div class="form-group">
+          <label for="location">Location:</label>
+          <input type="text" class="form-control" placeholder="Enter location" name="location"
+            [(ngModel)]="candidate.location" #location="ngModel" required
+            [class.is-invalid]="location.invalid && location.touched">
+          <small class="text-danger" [class.d-none]="location.valid || location.untouched">Candidate loaction is a
+            required field</small>
+        </div>
+        <div class="form-group">
+          <label for="marStatus">Marital Status:</label>
+          <input type="text" class="form-control" placeholder="Enter Maritial status" name="marStatus"
+            [(ngModel)]="candidate.maritialStatus" #marStatus="ngModel" required
+            [class.is-invalid]="marStatus.invalid && marStatus.touched">
+          <small class="text-danger" [class.d-none]="marStatus.valid || marStatus.untouched">Maritial Status is a
+            required field</small>
+        </div>
+        <div class="form-group">
+          <label for="skills">Skills:</label>
+          <input type="text" class="form-control" placeholder="Enter Skills" name="skills"
+            [(ngModel)]="candidate.skills" #skills="ngModel" required
+            [class.is-invalid]="skills.invalid && skills.touched">
+          <small class="text-danger" [class.d-none]="skills.valid || skills.untouched">Skills is a required
+            field</small>
+        </div>
+        <div class="form-group">
+          <label for="technology">Technology:</label>
+          <input type="text" class="form-control" placeholder="Enter Technology" name="technology"
+            [(ngModel)]="candidate.technology" #technology="ngModel" required
+            [class.is-invalid]="technology.invalid && technology.touched">
+          <small class="text-danger" [class.d-none]="technology.valid || technology.untouched">Technology is a required
+            field</small>
+        </div>
+        <div class="form-group">
+          <label for="totExp">Total Experience:</label>
+          <input type="text" class="form-control" placeholder="Enter total experiance" name="totExp"
+            [(ngModel)]="candidate.totalExperiance" #totExp="ngModel" required
+            [class.is-invalid]="totExp.invalid && totExp.touched">
+          <small class="text-danger" [class.d-none]="totExp.valid || totExp.untouched">Total Experiance is a required
+            field</small>
+        </div>
+        <!-- <div class="form-group">
+              <label for="status">Status:</label>
+              <input type="text" class="form-control" placeholder="Enter Status(By default 1)" name="status" [(ngModel)]="candidate.status" #status="ngModel" required
+                  [class.is-invalid]="status.invalid && status.touched">
+              <small class="text-danger" [class.d-none]="status.valid || status.untouched">Status is a required field</small>
+            </div> -->
+
+        <div class="form-group">
+          <label for="relExp">Relevant Experiance:</label>
+          <input type="text" class="form-control" placeholder="Enter Relevant Experiance" name="relExp"
+            [(ngModel)]="candidate.relevantExperiance" #relExp="ngModel" required
+            [class.is-invalid]="relExp.invalid && relExp.touched">
+          <small class="text-danger" [class.d-none]="relExp.valid || relExp.untouched">Relevant Experiance is a required
+            field</small>
+        </div>
+
+
+
+        <button [disabled]="Registrationform.form.invalid" type="submit" class="btn btn-info"
+          style="margin-top: 5px;">Register</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- </div> -->

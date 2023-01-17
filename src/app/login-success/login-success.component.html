@@ -1,0 +1,509 @@
+<nav id="navbarMenu" class="navbar navbar-expand navbar-dark bg-dark">
+  <a href="#" class="navbar-brand">
+    <img
+      src="https://cdn.cookielaw.org/logos/a1193491-22b8-424b-b694-15702547fbdb/801d1787-9693-44ca-9c8f-eb1275195361/91530d9a-0ba8-4ec0-bedf-cf49db8da706/Worldline-Mint-Horizontal.png"
+      width="45" alt="" class="d-inline-block align-middle mr-2" /></a>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav" style="text-align: center">
+      <li class="nav-item active">
+        <a href="#" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item active">
+        <a href="#" class="nav-link" [routerLink]="['']">Logout</a>
+      </li>
+      <li class="nav-item active" (click)="openReport()" style="cursor: pointer">
+        <a class="nav-link">Report</a>
+      </li>
+    </ul>
+  </div>
+  <form class="form-inline d-flex align-items-center flex-nowrap">
+    <mat-form-field class="d-none d-sm-block">
+      <mat-label class="bi bi-filter"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="20" fill="currentColor"
+          class="bi bi-filter" viewBox="0 0 16 16">
+          <path
+            d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
+        </svg>&nbsp;Choose Filter</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let item of filter" [value]="item.value" (click)="displayFilter(item)">
+          {{ item.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <input #txt class="form-control mr-sm-2 d-none d-sm-block" type="search" placeholder="Search" aria-label="Search" />
+    <button class="
+        btn btn-outline-success
+        my-2 my-sm-0
+        d-none d-sm-block
+        bi-bi-search
+      " type="submit" style="margin-left: 5px" (click)="search(filterValue, txt.value)">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+        viewBox="0 0 16 16">
+        <path
+          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+      </svg>
+    </button>
+  </form>
+</nav>
+
+<div cdkDropListGroup>
+  <div id="outerDiv" class="example-container" style="background: #fff1d1">
+    <h5 class="font-weight-bold">
+      Shortlisted Candidates<button id="modalButton" type="button" class="btn btn-link font-weight-bold"
+        (click)="registerCandidate()">
+        + Add card
+      </button>
+    </h5>
+
+    <div id="style-1" class="scrollbar" style="
+        max-height: 700px;
+        overflow-y: auto;
+        border-radius: 10px;
+        margin-top: 10px;
+      ">
+      <div class="example-list" cdkDropList id="backlog" #backlogList="cdkDropList" [cdkDropListData]="backlog"
+        [cdkDropListConnectedTo]="['inProgress', 'inReview', 'done']" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of backlog; index as i" cdkDrag
+          style="border: none; padding: 10px 5px 0px 5px">
+          <div class="container">
+            <table class="display-4">
+              <tr>
+                <td id="candID">
+                  {{ item.candidateId }}
+                </td>
+                <td>
+                  <textarea id="firstTextArea" style="
+                      margin-left: 20px;
+                      margin-top: 10px;
+                      padding: 5px 5px 10px 10px;
+                      max-height: 30px;
+                      max-width: 100px;
+                    " [(ngModel)]="item.duedate" class="textarea-inline-control" cdkTextareaAutosize
+                    placeholder="DueDate" #ddate="ngModel" (keyup.enter)="
+                      displayDueDate(ddate.value, item.candidateId)
+                    ">
+                  </textarea>
+                </td>
+              </tr>
+              <tr>
+                <td class="bi bi-person-fill">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-person-fill" viewBox="0 0 16 16">
+                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                  </svg>&nbsp;{{ item.candidateName }}
+                </td>
+              </tr>
+              <tr>
+                <td class="bi bi-geo-alt-fill">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                  </svg>
+                  {{ item.location }}
+                </td>
+                <td>
+                  <textarea style="
+                      margin-left: 40px;
+                      padding: 5px 5px 25px 10px;
+                      max-height: 25px;
+                    " [(ngModel)]="item.project" class="textarea-inline-control" cdkTextareaAutosize
+                    placeholder="Project" #proj="ngModel" (keyup.enter)="displayProject(proj.value, item.candidateId)">
+                  </textarea>
+                </td>
+              </tr>
+              <tr>
+                <td class="bi bi-hourglass-bottom" style="font-size: 14px">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-hourglass-bottom" viewBox="0 0 16 16">
+                    <path
+                      d="M2 1.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1h-11a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1-.5-.5zm2.5.5v1a3.5 3.5 0 0 0 1.989 3.158c.533.256 1.011.791 1.011 1.491v.702s.18.149.5.149.5-.15.5-.15v-.7c0-.701.478-1.236 1.011-1.492A3.5 3.5 0 0 0 11.5 3V2h-7z" />
+                  </svg>
+                  {{ item.expectedLwd }}
+                </td>
+                <td>
+                  <textarea style="
+                      margin-left: 40px;
+                      padding: 5px 5px 25px 10px;
+                      max-height: 25px;
+                    " [(ngModel)]="item.position" class="textarea-inline-control" cdkTextareaAutosize
+                    placeholder="Position" #pos="ngModel" (keyup.enter)="displayPosition(pos.value, item.candidateId)">
+                  </textarea>
+                </td>
+              </tr>
+              <tr>
+                <td class="bi bi-graph-up" style="font-weight: bold">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="13" fill="currentColor"
+                    class="bi bi-graph-up" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                      d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z" />
+                  </svg>
+                  Exp- {{ item.relevantExperiance }}
+                </td>
+                <td>
+                  <textarea style="
+                      max-width: 30px;
+                      margin-left: 40px;
+                      padding: 5px 5px 20px 10px;
+                      max-height: 25px;
+                    " [(ngModel)]="item.gcm" class="textarea-inline-control" cdkTextareaAutosize placeholder="GCM"
+                    #gcmLevel="ngModel" (keyup.enter)="displayGCM(gcmLevel.value, item.candidateId)">
+                  </textarea>
+                </td>
+              </tr>
+              <tr>
+                <button class="btn btn-link" (click)="display(item)">
+                  View more&#8594;
+                </button>
+              </tr>
+            </table>
+          </div>
+          <!-- ------------- -->
+        </div>
+        <!-- ----- -->
+        <!-- ----------- -->
+      </div>
+    </div>
+  </div>
+
+  <div id="outerDiv" class="example-container" style="background: #aed7eb">
+    <h5 class="font-weight-bold">
+      Interviews In Progress<button style="margin-left: 90px; background-color: #aed7eb" id="modalButton" type="button"
+        class="btn btn-link" (click)="registerCandidate()"></button>
+    </h5>
+
+    <div id="style-2" style="
+        max-height: 700px;
+        overflow-y: auto;
+        border-radius: 10px;
+        margin-top: 10px;">
+      <div cdkDropList id="inProgress" #progressList="cdkDropList" [cdkDropListData]="inProgress"
+        [cdkDropListConnectedTo]="['backlog', 'inReview', 'done']" class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of inProgress" cdkDrag
+          style="border: none; padding: 10px 5px 0px 5px">
+          <!-- <div id="style-2" class="scrollbar" style="
+            max-height: 700px;
+            overflow-y: auto;
+            border-radius: 10px;
+            margin-top: 10px;
+          "> -->
+          <div class="container">
+            <table class="display-4">
+              <tr>
+                <td id="candID">
+                  {{ item.candidateId }}
+                </td>
+                <td>
+                  <textarea style="
+                    margin-left: 20px;
+                    margin-top: 10px;
+                    padding: 5px 5px 10px 10px;
+                    max-height: 30px;
+                    max-width: 100px;
+                  " [(ngModel)]="item.duedate" class="textarea-inline-control" cdkTextareaAutosize
+                    placeholder="DueDate" #ddate="ngModel"
+                    (keyup.enter)="displayDueDate(ddate.value, item.candidateId)">
+                </textarea>
+                </td>
+              </tr>
+              <tr>
+                <td class="bi bi-person-fill">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-person-fill" viewBox="0 0 16 16">
+                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                  </svg>&nbsp;{{ item.candidateName }}
+                </td>
+              </tr>
+              <tr>
+                <td class="bi bi-geo-alt-fill">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                  </svg>
+                  {{ item.location }}
+                </td>
+                <td>
+                  <textarea style="
+                    margin-left: 40px;
+                    padding: 5px 5px 25px 10px;
+                    max-height: 25px;
+                  " [(ngModel)]="item.project" class="textarea-inline-control" cdkTextareaAutosize
+                    placeholder="Project" #proj="ngModel" (keyup.enter)="displayProject(proj.value, item.candidateId)">
+                </textarea>
+                </td>
+              </tr>
+              <tr>
+                <td class="bi bi-hourglass-bottom" style="font-size: 14px">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-hourglass-bottom" viewBox="0 0 16 16">
+                    <path
+                      d="M2 1.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1h-11a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1-.5-.5zm2.5.5v1a3.5 3.5 0 0 0 1.989 3.158c.533.256 1.011.791 1.011 1.491v.702s.18.149.5.149.5-.15.5-.15v-.7c0-.701.478-1.236 1.011-1.492A3.5 3.5 0 0 0 11.5 3V2h-7z" />
+                  </svg>
+                  {{ item.expectedLwd }}
+                </td>
+                <td>
+                  <textarea style="
+                    margin-left: 40px;
+                    padding: 5px 5px 25px 10px;
+                    max-height: 25px;
+                  " [(ngModel)]="item.position" class="textarea-inline-control" cdkTextareaAutosize
+                    placeholder="Position" #pos="ngModel" (keyup.enter)="displayPosition(pos.value, item.candidateId)">
+                </textarea>
+                </td>
+              </tr>
+              <tr>
+                <td class="bi bi-graph-up" style="font-weight: bold">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="13" fill="currentColor"
+                    class="bi bi-graph-up" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                      d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z" />
+                  </svg>
+                  Exp- {{ item.relevantExperiance }}
+                </td>
+                <td>
+                  <textarea style="
+                    max-width: 30px;
+                    margin-left: 40px;
+                    padding: 5px 5px 20px 10px;
+                    max-height: 25px;
+                  " [(ngModel)]="item.gcm" class="textarea-inline-control" cdkTextareaAutosize placeholder="GCM"
+                    #gcmLevel="ngModel" (keyup.enter)="displayGCM(gcmLevel.value, item.candidateId)">
+                </textarea>
+                </td>
+              </tr>
+              <tr>
+                <button class="btn btn-link" (click)="display(item)">
+                  View more&#8594;
+                </button>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="outerDiv" class="example-container" style="background: #b8ebe9">
+    <h5 class="font-weight-bold">
+      HR Review<button style="margin-left: 110px; background-color: #b8ebe9" id="modalButton" type="button"
+        class="btn btn-link" (click)="registerCandidate()"></button>
+    </h5>
+    <br />
+    <div id="style-3"  style="
+        max-height: 700px;
+        overflow-y: auto;
+        border-radius: 10px;
+        margin-top: 10px;
+      ">
+      <div class="example-list" cdkDropList id="inReview" #reviewList="cdkDropList" [cdkDropListData]="inReview"
+        [cdkDropListConnectedTo]="['backlog', 'inProgress', 'done']" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of inReview" cdkDrag style="border: none; padding: 10px 5px 0px 5px">
+          <div class="container">
+            <table class="display-4">
+              <tr>
+                <td id="candID">
+                  {{ item.candidateId }}
+                </td>
+                <td>
+                  <textarea style="
+                      margin-left: 20px;
+                      margin-top: 10px;
+                      padding: 5px 5px 10px 10px;
+                      max-height: 30px;
+                      max-width: 100px;
+                    " [(ngModel)]="item.duedate" class="textarea-inline-control" cdkTextareaAutosize
+                    placeholder="DueDate" #ddate="ngModel" (keyup.enter)="
+                      displayDueDate(ddate.value, item.candidateId)
+                    ">
+                  </textarea>
+                </td>
+              </tr>
+              <tr>
+                <td class="bi bi-person-fill">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-person-fill" viewBox="0 0 16 16">
+                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                  </svg>&nbsp;{{ item.candidateName }}
+                </td>
+              </tr>
+              <tr>
+                <td class="bi bi-geo-alt-fill">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                  </svg>
+                  {{ item.location }}
+                </td>
+                <td>
+                  <textarea style="
+                      margin-left: 40px;
+                      padding: 5px 5px 25px 10px;
+                      max-height: 25px;
+                    " [(ngModel)]="item.project" class="textarea-inline-control" cdkTextareaAutosize
+                    placeholder="Project" #proj="ngModel" (keyup.enter)="displayProject(proj.value, item.candidateId)">
+                  </textarea>
+                </td>
+              </tr>
+              <tr>
+                <td class="bi bi-hourglass-bottom" style="font-size: 14px">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-hourglass-bottom" viewBox="0 0 16 16">
+                    <path
+                      d="M2 1.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1h-11a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1-.5-.5zm2.5.5v1a3.5 3.5 0 0 0 1.989 3.158c.533.256 1.011.791 1.011 1.491v.702s.18.149.5.149.5-.15.5-.15v-.7c0-.701.478-1.236 1.011-1.492A3.5 3.5 0 0 0 11.5 3V2h-7z" />
+                  </svg>
+                  {{ item.expectedLwd }}
+                </td>
+                <td>
+                  <textarea style="
+                      margin-left: 40px;
+                      padding: 5px 5px 25px 10px;
+                      max-height: 25px;
+                    " [(ngModel)]="item.position" class="textarea-inline-control" cdkTextareaAutosize
+                    placeholder="Position" #pos="ngModel" (keyup.enter)="displayPosition(pos.value, item.candidateId)">
+                  </textarea>
+                </td>
+              </tr>
+              <tr>
+                <td class="bi bi-graph-up" style="font-weight: bold">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="13" fill="currentColor"
+                    class="bi bi-graph-up" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                      d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z" />
+                  </svg>
+                  Exp- {{ item.relevantExperiance }}
+                </td>
+                <td>
+                  <textarea style="
+                      max-width: 30px;
+                      margin-left: 40px;
+                      padding: 5px 5px 20px 10px;
+                      max-height: 25px;
+                    " [(ngModel)]="item.gcm" class="textarea-inline-control" cdkTextareaAutosize placeholder="GCM"
+                    #gcmLevel="ngModel" (keyup.enter)="displayGCM(gcmLevel.value, item.candidateId)">
+                  </textarea>
+                </td>
+              </tr>
+              <tr>
+                <button class="btn btn-link" (click)="display(item)">
+                  View more&#8594;
+                </button>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="outerDiv" class="example-container" style="background: #f3cad3">
+    <h5 class="font-weight-bold">
+      Hired Candidates<button style="margin-left: 150px; background-color: #f3cad3" id="modalButton" type="button"
+        class="btn btn-link" (click)="registerCandidate()"></button>
+    </h5>
+
+    <div id="style-4" style="
+        max-height: 700px;
+        overflow-y: auto;
+        border-radius: 10px;
+        margin-top: 10px;
+      ">
+      <div class="example-list" cdkDropList id="done" #doneList="cdkDropList" [cdkDropListData]="done"
+        [cdkDropListConnectedTo]="['backlog', 'inProgress', 'inReview']" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of done" cdkDrag style="border: none; padding: 10px 5px 0px 5px">
+          <div class="container">
+            <table class="display-4">
+              <tr>
+                <td id="candID">
+                  {{ item.candidateId }}
+                </td>
+                <td>
+                  <textarea style="
+                      margin-left: 20px;
+                      margin-top: 10px;
+                      padding: 5px 5px 10px 10px;
+                      max-height: 30px;
+                      max-width: 100px;
+                    " [(ngModel)]="item.duedate" class="textarea-inline-control" cdkTextareaAutosize
+                    placeholder="DueDate" #ddate="ngModel" (keyup.enter)="
+                      displayDueDate(ddate.value, item.candidateId)
+                    ">
+                  </textarea>
+                </td>
+              </tr>
+              <tr>
+                <td class="bi bi-person-fill">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-person-fill" viewBox="0 0 16 16">
+                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                  </svg>&nbsp;{{ item.candidateName }}
+                </td>
+              </tr>
+              <tr>
+                <td class="bi bi-geo-alt-fill">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                  </svg>
+                  {{ item.location }}
+                </td>
+                <td>
+                  <textarea style="
+                      margin-left: 40px;
+                      padding: 5px 5px 25px 10px;
+                      max-height: 25px;
+                    " [(ngModel)]="item.position" class="textarea-inline-control" cdkTextareaAutosize
+                    placeholder="Position" #pos="ngModel" (keyup.enter)="displayPosition(pos.value, item.candidateId)">
+                  </textarea>
+                </td>
+              </tr>
+              <tr>
+                <td class="bi bi-hourglass-bottom" style="font-size: 14px">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-hourglass-bottom" viewBox="0 0 16 16">
+                    <path
+                      d="M2 1.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1h-11a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1-.5-.5zm2.5.5v1a3.5 3.5 0 0 0 1.989 3.158c.533.256 1.011.791 1.011 1.491v.702s.18.149.5.149.5-.15.5-.15v-.7c0-.701.478-1.236 1.011-1.492A3.5 3.5 0 0 0 11.5 3V2h-7z" />
+                  </svg>
+                  {{ item.expectedLwd }}
+                </td>
+                <td>
+                  <textarea style="
+                      margin-left: 40px;
+                      padding: 5px 5px 25px 10px;
+                      max-height: 25px;
+                    " [(ngModel)]="item.project" class="textarea-inline-control" cdkTextareaAutosize
+                    placeholder="Project" #proj="ngModel" (keyup.enter)="displayProject(proj.value, item.candidateId)">
+                  </textarea>
+                </td>
+              </tr>
+              <tr>
+                <td class="bi bi-graph-up" style="font-weight: bold">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="13" fill="currentColor"
+                    class="bi bi-graph-up" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                      d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z" />
+                  </svg>
+                  Exp- {{ item.relevantExperiance }}
+                </td>
+                <td>
+                  <textarea style="
+                      max-width: 30px;
+                      margin-left: 40px;
+                      padding: 5px 5px 20px 10px;
+                      max-height: 25px;
+                    " [(ngModel)]="item.gcm" class="textarea-inline-control" cdkTextareaAutosize placeholder="GCM"
+                    #gcmLevel="ngModel" (keyup.enter)="displayGCM(gcmLevel.value, item.candidateId)">
+                  </textarea>
+                </td>
+              </tr>
+              <tr>
+                <button class="btn btn-link" (click)="display(item)">
+                  View more&#8594;
+                </button>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

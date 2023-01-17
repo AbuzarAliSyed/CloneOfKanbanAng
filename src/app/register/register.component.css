@@ -1,0 +1,84 @@
+
+body{
+
+    background: url("src\assets\pt.png");  
+    height: 800px;
+  }
+  
+   form{
+     width: 60%;
+     height: 60%;
+     padding: 20px;
+     
+     
+     background: white;
+    border-radius: 30px;
+    box-shadow: 0 8px 16px #45beaa;
+  }
+  
+  
+  
+  
+  
+  a {
+    
+  
+     border: none;
+   
+     outline: none;
+   
+     height: 50px;
+   
+     width: 100px;
+   
+     background-color:aliceblue;
+   
+     color:#45beaa;
+   
+     border-radius: 4px;
+   
+     font-weight: bold;
+   }
+   
+   a:hover {
+     background-color:whitesmoke;
+   
+     border: 0px solid;
+   
+     color:#45beaa;
+   }
+  
+  
+  
+  hr{
+  
+     box-shadow: 0 8px 16px #45beaa;
+  }
+  
+  
+  
+  p:hover{
+    color: #45beaa;
+  }
+  
+  
+  
+  
+  button{
+    background-color:aliceblue;
+   
+     color:#45beaa;
+  
+  }
+  
+  
+  button:hover{
+    background-color:whitesmoke;
+   
+  
+  
+    color:#45beaa;
+  }
+  
+  
+  

@@ -1,0 +1,64 @@
+body {
+  color: black;
+  background-color: #d7eeff;
+  border-radius: 15px;
+  height: 100%;
+  width: 100%;
+  
+}
+
+th {
+  border: 1px solid black;
+  /* padding: 6px; */
+  width: 100%;
+}
+
+td {
+  border: 1px solid black;
+  /* padding: 6px; */
+  width: 100;
+}
+
+button {
+  position: relative;
+  bottom: 0px;
+  margin-left: 10px;
+  color: white;
+  margin-bottom: 10px;
+  background-color: #8fef9e;
+}
+
+button:hover {
+  background-color: white;
+
+  border: 1px solid;
+
+  color: #8fef9e;
+}
+
+/* #test{
+  width: 250px;
+  height: 400px;
+  margin: 50px 20px;
+  border: 1px solid #0000;
+  overflow: auto;
+}
+
+#test::-webkit-scrollbar{
+  width: 20px;
+}
+
+#test::-webkit-scrollbar-track{
+  border-radius: 10px;
+  background: green;
+}
+
+#test::-webkit-scrollbar-thumb{
+  border-radius: 10px;
+  background:yellow;
+} */
+
+
+
+
+

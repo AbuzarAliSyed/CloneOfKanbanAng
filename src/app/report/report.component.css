@@ -1,0 +1,133 @@
+
+
+
+mat-form-field{
+    margin-top:10px;
+    margin-right:10px;
+    color:#45beaa;
+    /* border:yellow;
+    border-style:solid; */
+  }
+  
+  mat-label{
+    color:#45beaa;
+    margin-bottom:5px;
+    padding-bottom:10px;
+  
+    /* border:red;
+    border-style:solid; */
+  
+  }
+  
+  mat-select{
+    /* border:white;
+    border-style:solid; */
+    padding-left:15px;
+    margin-right:30px;
+    margin-bottom:5px;
+  }
+  
+  mat-option{
+    color:#45beaa;
+  }
+  
+  
+  mat-select-content{
+    color:#45beaa !important;
+    margin-left:20px;
+    background-color: red;
+  }
+  
+  
+  :host/deep/.mat-select-value-text{
+    color:#45beaa !important;
+  }
+  
+  :host/deep/.mat-select-arrow{
+    color:#45beaa
+  }
+  
+  :host/deep/.mat-form-field-underline{
+   background-color:#45beaa !important;
+   padding-right:25px !important;
+  }
+
+#heading{
+  border-radius:5px;
+  background-color: #45beaa;
+  color:white;
+  font-size: 30px;
+}
+  
+
+
+.button {
+  align-items: center;
+  background-color:#45beaa;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  display: flex;
+  font-family: Phantomsans, sans-serif;
+  font-size: 15px;
+  justify-content: center;
+  line-height: 1em;
+  max-width: 100%;
+  min-width: 40px;
+  padding: 19px 24px;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.button:active,
+.button:hover {
+  outline: 0;
+}
+
+/* @media (min-width: 768px) {
+  .button {
+    font-size: 24px;
+    min-width: 196px;
+  }
+} */
+
+table{
+  width:450px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  box-shadow: 3px 3px 3px 3px rgb(0 0 0 / 0.2);
+  border-collapse: separate;
+  border-spacing: 15px 15px;
+}
+
+/* .btn-close{
+  top: 0px;
+  float: right;
+ 
+  
+  font-size: 20px;
+  cursor: pointer;
+ 
+  right: 0;
+  margin-left: 85px;
+}
+
+button{
+  background-color: transparent;
+  opacity: 0.5;
+} */
+
+.rel{
+  position: relative;
+}
+
+mat-icon:hover{
+  color: #45beaa;
+}

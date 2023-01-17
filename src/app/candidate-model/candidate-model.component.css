@@ -1,0 +1,79 @@
+form {
+
+    width: 100%;
+    height: 220%;
+    padding: 20px;
+    background: white;
+    border-radius: 30px;
+    box-shadow: 0 8px 20px black;
+    bottom: 0%; position: relative; 
+  }
+  
+  input[type=text], input[type=password],input[type=candidateid] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+  }
+  
+.mat-dialog-container{
+    border-radius:10px;
+}
+
+h5{
+    margin-bottom:5px;
+}
+
+#style-1::-webkit-scrollbar-track{
+
+  box-shadow:inset 0 0 6px rgba(0,0,0,0.3);
+
+  background-color: #F5F5F5;
+
+  border-radius: 10px;
+
+}
+
+
+
+#style-1::-webkit-scrollbar{
+
+  width:15px;
+
+  background-color: #F5F5F5;
+
+  
+
+}
+
+
+
+#style-1::-webkit-scrollbar-thumb{
+
+  background-color:#398a7c;
+
+  border-radius: 10px;
+
+  background-image: -webkit-linear-gradient(45deg,
+
+                                              rgba(255, 255, 255, .2) 25%,
+
+                                              transparent 25%,
+
+                                              transparent 50%,
+
+                                              rgba(255, 255, 255, .2) 50%,
+
+                                              rgba(255, 255, 255, .2) 75%,
+
+                                              transparent 75%,
+
+                                              transparent)
+
+}
+mat-icon:hover{
+  color: #45beaa;
+}
+
